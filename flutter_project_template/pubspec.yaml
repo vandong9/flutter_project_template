@@ -34,6 +34,8 @@ dependencies:
   dio: ^3.0.8
   http: ^0.12.0+4
 
+  # Crash crashlytics
+  firebase_crashlytics: ^0.1.3
 
 
   #### State management

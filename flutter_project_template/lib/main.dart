@@ -6,9 +6,14 @@ import 'package:flutter/material.dart';
 import 'flavor_config.dart';
 import 'global_providers.dart';
 import 'routers.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 // Run app
 void main() {
+  Crashlytics.instance.enableInDevMode = true;
+  // Pass all uncaught errors from the framework to Crashlytics.
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+
   FlavorConfig(flavor: Flavor.PRODUCTION, color: Colors.deepPurpleAccent);
   runApp(MultiProvider(
     providers: [
