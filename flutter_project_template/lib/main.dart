@@ -65,6 +65,16 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               FlatButton(
                 onPressed: () {
+                  pushToDesignPatternSamplesPage(context);
+                },
+                child: Text("Design Pattern Samples"),
+              )
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              FlatButton(
+                onPressed: () {
                   pushReplaceToUIControlPage(context);
                 },
                 child: Text("UI Controls Samples"),

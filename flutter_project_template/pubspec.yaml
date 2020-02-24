@@ -32,6 +32,8 @@ dependencies:
   connectivity: ^0.4.6+2
   # Request Utility despite using http
   dio: ^3.0.8
+  http: ^0.12.0+4
+
 
 
   #### State management

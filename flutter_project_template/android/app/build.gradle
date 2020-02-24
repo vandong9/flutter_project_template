@@ -54,14 +54,15 @@ android {
         }
     }
 
-    flavorDimensions "default"
+    flavorDimensions "flavors"
     productFlavors {
         dev {
-            deminsion "default"
-            applicatoinIdSuffix ".dev"
+            dimension "flavors"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
         }
         prod {
-            deminsion "default"
+            dimension "flavors"
         }
     }
 }
