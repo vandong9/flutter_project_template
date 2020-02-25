@@ -2,6 +2,25 @@
 Flutter Project Template
 
 
+# Convention
+  - Follow https://dart.dev/guides/language/effective-dart/style
+  # Naming 
+    - File and folder:
+      - Use slower sneak case (slower text with underscore)
+      - suffix of Intent/ViewController is _page
+    - assest:
+      - small icon with prefix ic_
+      - Image with prefix img_
+      - large image to make background prefix with bg_
+      
+ Folder Structure:
+ 
+ Code Sections and Order:
+ 
+ import path:
+ 
+
+
 # Flavor
 current config DEV and PRODUCTION
 to add new configure: ex: Staging
