@@ -34,14 +34,20 @@ dependencies:
   dio: ^3.0.8
   http: ^0.12.0+4
 
+  # Local Storage
+  sqflite: ^0.13.0+1
+
   # Crash crashlytics
   firebase_crashlytics: ^0.1.3
 
+  # Utility
+  material_search: ^0.2.8
 
   #### State management
   # Redux
   flutter_redux: ^0.6.0
-
+  # Scoped Model
+  scoped_model: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -60,9 +66,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
     # assets-generator-begin
-    # r_generate.py will fill the reference to image in here
+    - assets/images/
+    - assets/images/weather/
     # assets-generator-end
     
   # An image asset can refer to one or more resolution-specific "variants", see

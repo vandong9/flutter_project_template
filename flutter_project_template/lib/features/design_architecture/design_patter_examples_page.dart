@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project_template/core/routes/navigation.dart';
 
 import 'mvp_demo/presenter/contact_view.dart';
+import './mvvm_demo/ui/home/home_page.dart';
 
 class DesignPatternExamplePage extends StatelessWidget {
   @override
@@ -15,7 +16,12 @@ class DesignPatternExamplePage extends StatelessWidget {
               onPressed: () {
                 push(context, ContactsPage());
               },
-              child: Text("MVP Example"))
+              child: Text("MVP Example")),
+          FlatButton(
+              onPressed: () {
+                push(context, HomePage());
+              },
+              child: Text("MVVM Example"))
         ],
       ),
     );
