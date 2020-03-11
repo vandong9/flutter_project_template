@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_template/core/routes/navigation.dart';
 
+import 'bloc/bloc_sample_count_page.dart';
 import 'redux/redux_sample_count_page.dart';
 
 class StateManagementSamplesPage extends StatelessWidget {
@@ -17,7 +18,12 @@ class StateManagementSamplesPage extends StatelessWidget {
               onPressed: () {
                 push(context, ReduxSampleCountPage());
               },
-              child: Text("Redux Count Example"))
+              child: Text("Redux Count Example")),
+          FlatButton(
+              onPressed: () {
+                push(context, BlocSampleCountPage());
+              },
+              child: Text("Bloc Count Example"))
         ],
       ),
     );
