@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+# !/usr/bin/python3
 
 # NOTE: all images need to place in folder or hirachy folder of ROOT_FOLDER
 #      file pubspec.yaml  NEED have these two line with content defined in sinalStart, sinalEnd in assets the section like this:
@@ -50,7 +50,8 @@ def processFolderName(folderName):
     replacedUnderscoreString = folderName.replace("_", " ")
     replacedUnderscoreString = replacedUnderscoreString.title()
     removedSpaceString = replacedUnderscoreString.replace(" ", "")
-    return removedSpaceString
+    # adding Images to limit the conflict class name with other user defined class
+    return removedSpaceString + "Images"
 
 
 def processFileName(fileName):
@@ -66,7 +67,8 @@ def processFileName(fileName):
 def generateResourceForFolder(folderPath, folderName, level):
     stringArray = []
     subFolderString = []
-    stringArray.append("class " + processFolderName(folderName) + " {")
+    stringArray.append(
+        "class " + processFolderName(folderName) + " {")
     for fileName in os.listdir(folderPath):
         newPath = os.path.join(folderPath, fileName)
         if os.path.isdir(newPath):
@@ -103,7 +105,7 @@ arrayStrings = []
 arrayStrings.append(
     "//*** This is the automate generated file, DO NOT EDIT ***")
 arrayStrings.append("\n\r")
-arrayStrings.append("final Resource R = Resource();")
+arrayStrings.append("final ResourceImages R = ResourceImages();")
 arrayStrings.append("\n\r")
 fileString = separator.join(
     generateResourceForFolder(assetsFolder, "Resource", 0))
