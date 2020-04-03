@@ -1,5 +1,4 @@
 import '../data/contact_data.dart';
-import '../data/contact_data_impl.dart';
 import '../data/contact_data_mock.dart';
 
 /// Simple DI

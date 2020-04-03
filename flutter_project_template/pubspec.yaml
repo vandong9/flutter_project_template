@@ -50,9 +50,13 @@ dependencies:
 
   # Utility
   material_search: ^0.2.8
+  # commond widget
   commons: ^0.7.3
   # utility for processing in collection
   dartx: ^0.3.0
+
+  # usful extension and util
+  basic_utils: ^2.5.3
 
 
   # Support access object in async
@@ -114,3 +118,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+linter:
+  rules:
+    - annotate_overrides
+    - hash_and_equals
+    - prefer_is_not_empty
