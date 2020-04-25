@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_template/core/language/app_localization.dart';
+import 'package:project_template/core/language/index.dart';
+import 'package:provider/provider.dart';
 
 class UIControlPage extends StatefulWidget {
   @override
@@ -9,6 +12,7 @@ class UIControlPage extends StatefulWidget {
 class _UIControlPageState extends State<UIControlPage> {
   @override
   Widget build(BuildContext context) {
+    LanguageProvider language = Provider.of<LanguageProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("UI Controls"),
@@ -27,6 +31,22 @@ class _UIControlPageState extends State<UIControlPage> {
                   onPressed: () {
                     _neverSatisfied(context);
                   })
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Checkbox(
+                value: language.languageCode == LanguageCode.VietNam,
+                onChanged: (isChecked) {
+                  if (isChecked) {
+                    language.changeLanguageByCode(code: LanguageCode.VietNam);
+                  } else {
+                    language.changeLanguageByCode(code: LanguageCode.English);
+                  }
+                },
+              ),
+              Text(language.languageCode == LanguageCode.VietNam ? "vn" : "en"),
+              Text(language.language.state_Management_Samples)
             ],
           )
         ],

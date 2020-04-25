@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'base_language.dart';
-import 'languages/english.dart';
-import 'languages/vietnamese.dart';
+import 'app_localization.dart';
+import 'languages/base.dart';
+import 'languages/en.dart';
+import 'languages/vn.dart';
 
 class LanguageProvider extends ChangeNotifier {
-  BaseLanguage _currentLanguage;
+  Base _currentLanguage;
+  LanguageCode _currentLanguageCode;
 
   LanguageProvider() {
-    _currentLanguage = EnglishLanguage();
+    _currentLanguage = Vn();
+    _currentLanguageCode = LanguageCode.VietNam;
   }
 
-  BaseLanguage getCurrentLanguage() => _currentLanguage;
-
-  void changeLanguage(BaseLanguage newLangauge) {
+  Base get language => _currentLanguage;
+  LanguageCode get languageCode => _currentLanguageCode;
+  void changeLanguage(Base newLangauge, LanguageCode code) {
+    print("Dong: change to language $code");
+    _currentLanguageCode = code;
     _currentLanguage = newLangauge;
     notifyListeners();
   }
@@ -20,10 +25,10 @@ class LanguageProvider extends ChangeNotifier {
   void changeLanguageByCode({@required LanguageCode code}) {
     switch (code) {
       case LanguageCode.English:
-        changeLanguage(EnglishLanguage());
+        changeLanguage(En(), code);
         break;
       case LanguageCode.VietNam:
-        changeLanguage(VietNamLanguage());
+        changeLanguage(Vn(), code);
         break;
     }
   }

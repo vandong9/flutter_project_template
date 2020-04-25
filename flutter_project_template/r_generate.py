@@ -2,8 +2,10 @@
 
 # NOTE: all images need to place in folder or hirachy folder of ROOT_FOLDER
 #      file pubspec.yaml  NEED have these two line with content defined in sinalStart, sinalEnd in assets the section like this:
-#        # assets-generator-begin
-#        # assets-generator-end
+#       flutter:
+#           assets:
+#           # assets-generator-begin
+#           # assets-generator-end
 import os
 
 currentPath = os.path.dirname(__file__)
@@ -12,24 +14,35 @@ ROOT_FOLDER = 'assets/images'
 sinalStart = "assets-generator-begin"
 sinalEnd = "assets-generator-end"
 
-
+# assets
+#  |-someImage.jpg
+#  |-General
+#       |-someImage.jpg
+#       |-AB
+#          |-imageAB.jpg
+#          |-A
+#            |-a.jpg
+#          |-B
+#            |-b.jpg
+#
+#
 # out put string expect
 # final Resource R = Resource();
 #
 # Resource {
 #   final General general = General()
-#   final String someImage = "someImage.jpg"
-#   final String some
+#   final String someImage = "someImage.jpg";
 # }
 #
 # class General {
 #   final String someImage = "someImage.jpg"
+#   final AB aB =  AB();
 # }
 #
 # class AB {
 #   final A a = A()
 #   final B a = B()
-#   final String ab = "imageAB.png"
+#   final String imageAB = "imageAB.png"
 # }
 #
 # class A {
@@ -39,6 +52,16 @@ sinalEnd = "assets-generator-end"
 # clas B {
 #   final String b = "b.jpg"
 # }
+#
+# file pubspec.yaml will updated
+# flutter:
+#           assets:
+#           # assets-generator-begin
+#               - assets/General/
+#               - assets/AB/
+#               - assets/AB/A/
+#               - assets/AB/B/
+#
 
 
 def lowerOnlyFirstCharacter(string):

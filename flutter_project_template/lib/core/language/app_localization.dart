@@ -2,12 +2,11 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:project_template/global_providers.dart';
-import 'base_language.dart';
 
 // NOTE: current not use localize by json,
 // this class just implement the delegate to listen the change of Locale of device
 // to call languageProvider update
+enum LanguageCode { VietNam, English }
 
 class AppLocalizations {
   final Locale locale;
@@ -21,15 +20,13 @@ class AppLocalizations {
   }
 
   // Static member to have a simple access to the delegate from the MaterialApp
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
-    String jsonString =
-        await rootBundle.loadString('i18n/${locale.languageCode}.json');
+    String jsonString = await rootBundle.loadString('i18n/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
     _localizedStrings = jsonMap.map((key, value) {
@@ -45,8 +42,7 @@ class AppLocalizations {
   }
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   // This delegate instance will never change (it doesn't even have fields!)
   // It can provide a constant constructor.
   const _AppLocalizationsDelegate();
@@ -54,13 +50,13 @@ class _AppLocalizationsDelegate
   @override
   bool isSupported(Locale locale) {
     // Detect language and call language provider update
-    if (locale.countryCode == 'vn') {
-      languageProvider.changeLanguageByCode(code: LanguageCode.VietNam);
-    } else {
-      languageProvider.changeLanguageByCode(code: LanguageCode.English);
-    }
+//    if (locale.countryCode == 'vn') {
+//      LNotify.changeLanguageByCode(code: LanguageCode.VietNam);
+//    } else {
+//      LNotify.changeLanguageByCode(code: LanguageCode.English);
+//    }
     // Include all of your supported language codes here
-    return ['en', 'ar'].contains(locale.languageCode);
+    return ['en', 'vn'].contains(locale.languageCode);
   }
 
   @override
