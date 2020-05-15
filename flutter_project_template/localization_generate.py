@@ -24,31 +24,61 @@ def lowerOnlyFirstCharacter(string):
 
 
 def processAttributeName(attribute):
-    replacedUnderscoreString = attribute.replace(" ", "_")
-    replacedUnderscoreString = replacedUnderscoreString.title()
-    removedSpaceString = replacedUnderscoreString.replace(" ", "")
+    replacedUnderscoreString = attribute.title()
+    replacedUnderscoreString = replacedUnderscoreString.replace(" ", "_")
     # adding Language to limit the conflict class name with other user defined class
-    return removedSpaceString
+    return replacedUnderscoreString
 
 
-def generateClassForDictoinaryAttribute(attributeName, attributeValue, level, isPrivateClass, isNeedExtendBaseClass):
+def generateClassForDictoinaryAttribute(languageFileName, isBase, isRootNode, attributeName, attributeValue, level, isPrivateClass):
     stringArray = []
     dictionaryAttributes = []
-    underScore = ""
-    if isPrivateClass:
-        underScore = "_"
     extendBaseClass = ""
-    if isNeedExtendBaseClass:
-        extendBaseClass = " extends Base "
-        stringArray.append("import 'base.dart';")
+    prefixClass = ""
+    if isBase:
+        if isRootNode == False:
+            prefixClass = "Base"
+    else:
+        if isRootNode:
+            stringArray.append("import 'base.dart';")
+            extendBaseClass = " extends Base"
+            prefixClass = languageFileName.title()
+
+        else:
+            prefixClass = languageFileName.title()
+            extendBaseClass = " extends Base" + \
+                processAttributeName(attributeName) + " "
+
+
+# if not base.json
+# need import base.dart
+#
+# if isRootNode node of json file
+#    need extend base class if not the base.json file
+# else
+#    if attribute is dictionary
+#       create new class
+#          if base.json file
+#               class name have prefix Base
+#          else will have prefix by json file name
+#       create property with type is new class from base.json file  ex:  BaseChild child = EnChild()
+#    else  create new string property
+#
+#
+    defineClassPrefix = ""
+    if isRootNode == False:
+        defineClassPrefix = prefixClass
     stringArray.append(
-        "class " + underScore + processAttributeName(attributeName) + extendBaseClass + " {")
+
+        "class " + defineClassPrefix + processAttributeName(attributeName) + extendBaseClass + " {")
     for attribute, value in attributeValue.iteritems():
         if isinstance(value, dict):
             dictionaryAttributes.append(DictionaryAttribute(attribute, value))
             attributeClassName = processAttributeName(attribute)
+            if isBase:
+                prefixClass = "Base"
             stringArray.append(
-                "_" + attributeClassName + " get " + lowerOnlyFirstCharacter(attributeClassName) + " => " + "_" + attributeClassName + "();")
+                "Base" + attributeClassName + " get " + lowerOnlyFirstCharacter(attributeClassName) + " => " + prefixClass + attributeClassName + "();")
             stringArray.append("\n\r")
 
         else:
@@ -58,7 +88,7 @@ def generateClassForDictoinaryAttribute(attributeName, attributeValue, level, is
     stringArray.append("}")
     for dictionary in dictionaryAttributes:
         nestString = generateClassForDictoinaryAttribute(
-            dictionary.name, dictionary.value, level + 1, True, False)
+            languageFileName, isBase, False, dictionary.name, dictionary.value, level + 1, True)
         # stringArray.append(separator.join(nestString))
         stringArray.extend(nestString)
         stringArray.append("\n")
@@ -82,7 +112,7 @@ def generateFileR(fileName, path):
         separator = "\n"
         className = fileName.replace(".json", "")
         result = separator.join(
-            generateClassForDictoinaryAttribute(className, data, 1, False, className != "base"))
+            generateClassForDictoinaryAttribute(className, className == "base", True, className, data, 1, False))
         arrayStrings.extend(result)
 
         # generate file dart

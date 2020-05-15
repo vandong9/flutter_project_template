@@ -70,8 +70,8 @@ def lowerOnlyFirstCharacter(string):
 
 
 def processFolderName(folderName):
-    replacedUnderscoreString = folderName.replace("_", " ")
-    replacedUnderscoreString = replacedUnderscoreString.title()
+    replacedUnderscoreString = folderName.title()
+    replacedUnderscoreString = replacedUnderscoreString.replace("_", " ")
     removedSpaceString = replacedUnderscoreString.replace(" ", "")
     # adding Images to limit the conflict class name with other user defined class
     return removedSpaceString + "Images"
@@ -79,8 +79,8 @@ def processFolderName(folderName):
 
 def processFileName(fileName):
     fileNameOnly = os.path.splitext(fileName)[0]
-    replacedUnderscoreString = fileNameOnly.replace("_", " ")
-    replacedUnderscoreString = replacedUnderscoreString.title()
+    replacedUnderscoreString = fileNameOnly.title()
+    replacedUnderscoreString = replacedUnderscoreString.replace("_", " ")
     removedSpaceString = replacedUnderscoreString.replace(" ", "")
     return lowerOnlyFirstCharacter(removedSpaceString)
 
@@ -102,7 +102,7 @@ def generateResourceForFolder(folderPath, folderName, level):
                 folderToImports.append(folderPath + "/" + fileName)
                 processedFolderName = processFolderName(fileName)
                 stringArray.append(
-                    "   final " + processedFolderName.lower() + " = " + processedFolderName + "();")
+                    "   final " + lowerOnlyFirstCharacter(processedFolderName) + " = " + processedFolderName + "();")
                 subFolderString.append(generateResourceForFolder(
                     newPath, fileName, level + 1))
         elif fileName.endswith(".png" or ".jpg" or ".jpeg"):
