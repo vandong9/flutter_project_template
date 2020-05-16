@@ -4,9 +4,11 @@ import os
 
 projectPath = os.path.dirname(__file__)
 
-###
+# NOTE
 # There must have file base.json that contain all the keyword
+#  all property name of property dicitonary type MUST different  because this name will be used to genenerate class
 # The language json file should follow the code ex: en, fr
+#
 # ex:
 # base.json
 # {
