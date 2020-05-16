@@ -4,9 +4,53 @@ import os
 
 projectPath = os.path.dirname(__file__)
 
-# There is case same class name when attibute in dictionary type have same name
+###
+# There must have file base.json that contain all the keyword
+# The language json file should follow the code ex: en, fr
+# ex:
+# base.json
+# {
+#   "Hello world": "Hello world",
+#   "Hello Other": {
+#       "Hello in English": "Hello in English",
+#       "Hello in VietNam": "Hello in VietNam"
+#   }
+# }
+# vn.json
+# {
+#   "Hello world": "Chào thế giới",
+#   "Hello Other": {
+#       "Hello in English": "Chào bằng Tiếng Anh",
+#       "Hello in VietNam": "Chào bằng Tiếng Việt"
+#   }
+# }
 #
+# The Out put:
 #
+# base.dart
+# class Base {
+#   String get helloWorld => "Chào thế giới";
+#   BaseHelloOther hello_Other => BaseHello_Other();
+# }
+
+# class BaseHello_Other {
+#     String get hello_In_English => "Hello in English";
+#     String get hello_In_Vietnam => "Hello in VietNam";
+# }
+#
+# vn.dart
+# class Vn extends Base {
+#   String get helloWorld => "Hello world";
+#   BaseHelloOther hello_Other => VnHello_Other();
+# }
+
+# class VnHello_Other extends BaseHello_Other {
+#     String get hello_In_English => "Chào bằng Tiếng Anh";
+#     String get hello_In_Vietnam => "Chào bằng Tiếng Việt";
+# }
+#
+###
+
 localizedFolder = os.path.join(projectPath, 'lib/core/language/languages/')
 
 outputPath = os.path.join(projectPath, 'lib/l.dart')
@@ -63,7 +107,6 @@ def generateClassForDictoinaryAttribute(languageFileName, isBase, isRootNode, at
 #          else will have prefix by json file name
 #       create property with type is new class from base.json file  ex:  BaseChild child = EnChild()
 #    else  create new string property
-#
 #
     defineClassPrefix = ""
     if isRootNode == False:
